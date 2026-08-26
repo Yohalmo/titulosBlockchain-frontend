@@ -47,15 +47,15 @@ export class Blockchain {
   }
 
   mineBlock(block) {
-    let nonce = 0;
+    let nonce = -1;
     let hash = "";
 
     do {
-      hash = block.calculateHash(nonce);
       nonce++;
+      hash = block.calculateHash(nonce);
     } while (!hash.startsWith(this.proofOfWork));
 
-    block.register(nonce - 1, hash);
+    block.register(nonce, hash);
   }
 
   verifyProofOfWork(block) {
